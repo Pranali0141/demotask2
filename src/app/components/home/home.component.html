@@ -1,0 +1,51 @@
+
+<div class="container">
+    <form>
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+            
+            <input type="hidden" name="id" formControlName="id">
+            
+            <label>Name:</label>
+            <input type="text" name="name" formControlName="name" class="form-control" placeholder="Enter the Name" 
+              [ngClass]= "{'is-invalid': submitted && myForm.controls.name.errors}" >
+            <div *ngIf="submitted && myForm.controls.name.errors">
+                <div *ngIf="submitted  && myForm.controls.name.errors.required" class="text-danger">This Firld is required</div>
+            </div>
+
+            <label>Address:</label>
+            <input type="text" name="address" formControlName="address" class="form-control" placeholder="Enter the Address" 
+              [ngClass]= "{'is-invalid': submitted && myForm.controls.address.errors}" >
+            <div *ngIf="submitted && myForm.controls.address.errors">
+                <div *ngIf="submitted  && myForm.controls.address.errors.required" class="text-danger">This Firld is required</div>
+            </div>
+
+            <label>Email:</label>
+            <input type="email" name="email" formControlName="email" class="form-control" placeholder="Enter the Email"
+              [ngClass]= "{'is-invalid': submitted && myForm.controls.email.errors}" >
+            <div *ngIf="submitted && myForm.controls.email.errors">
+                <div *ngIf="submitted && myForm.controls.email.errors.required" class="text-danger">This Field is required</div>
+            </div>&nbsp;
+            <br>
+            <button class="btn btn-primary">Submit</button>
+            
+
+        </form>
+    </form>
+
+    <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+            <tr *ngFor="let item of AllData; let i=index;">
+                <td>{{item.id}}</td>
+                <td>{{item.name || "NA"}}</td>
+                <td>{{item.address  || "NA"}}</td>
+                <td>{{item.email  || "NA"}}</td>
+                <td><i class="bi bi-trash" (click)="del(i)"></i></td>
+            </tr>
+    </table>
+</div>
